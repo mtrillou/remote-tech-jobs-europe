@@ -1,0 +1,14 @@
+{
+  "repo_key": "remote-tech-jobs-europe",
+  "clusters": [
+    "software-engineering",
+    "backend-engineering",
+    "frontend-engineering",
+    "ai-ml",
+    "data-science",
+    "devops-sre",
+    "product-management"
+  ],
+  "description": "Fully remote and hybrid tech jobs at European companies \u2014 all roles, updated hourly.",
+  "last_updated": "2026-05-01T08:30:25.293773+00:00"
+}
