@@ -1,8 +1,8 @@
 # Remote Tech Jobs in Europe 🌍
 
-> Verified full-remote and hybrid tech roles at European companies — updated daily.
+> Live remote and hybrid tech roles at European companies — updated daily.
 
-> 🔥 **16 new roles added today** &nbsp;·&nbsp; 📈 **4 trending this week** &nbsp;·&nbsp; 🕐 **Updated 11 May 2026, 14:20 UTC**
+> 🔥 **0 new roles added today** &nbsp;·&nbsp; 📈 **6 trending this week** &nbsp;·&nbsp; 🕐 **Updated 11 May 2026, 14:46 UTC**
 
 **[→ Browse all jobs on TieTalent](https://tietalent.com/en/jobs)** &nbsp;·&nbsp; **[Create your free profile — companies apply to you](https://tietalent.com/register)**
 
@@ -10,41 +10,26 @@
 
 ## 🔥 Featured This Week
 
-| Role | Company | Location | Work | Link |
-|------|---------|----------|------|------|
-| **Cloud Architect** | Spotify | Remote — Europe | Full remote | [View →](https://tietalent.com/en/jobs/cloud-architect) |
-| **Backend Engineer** | Snyk | Remote — Germany | Full remote | [View →](https://tietalent.com/en/jobs/backend-engineer) |
-| **Software Engineer** | OVHcloud | Remote — Europe | Full remote | [View →](https://tietalent.com/en/jobs/software-engineer) |
-| **Frontend Developer** | Grafana Labs | Remote — Europe | Full remote | [View →](https://tietalent.com/en/jobs/frontend-developer) |
-| **Product Manager** | Snyk | Remote — UK | Hybrid | [View →](https://tietalent.com/en/jobs/product-manager) |
-| **Site Reliability Engineer** | Zalando | Remote — Germany | Hybrid | [View →](https://tietalent.com/en/jobs/site-reliability-engineer) |
+_No matching roles at the moment — check back tomorrow._
 
 ---
 
 ## 🆕 Recently Added
 
-| Role | Company | Location | Work | Link |
-|------|---------|----------|------|------|
-| **Software Engineer** | Grafana Labs | Remote — Switzerland | Full remote | [View →](https://tietalent.com/en/jobs/software-engineer) |
-| **Cybersecurity Engineer** | Revolut | Remote — UK | Full remote | [View →](https://tietalent.com/en/jobs/cybersecurity-engineer) |
-| **Platform Engineer** | SoundCloud | Remote — UK | Full remote | [View →](https://tietalent.com/en/jobs/platform-engineer) |
-| **Backend Engineer** | HashiCorp | Remote — Europe | Full remote | [View →](https://tietalent.com/en/jobs/backend-engineer) |
-| **Site Reliability Engineer** | Grafana Labs | Remote — France | Full remote | [View →](https://tietalent.com/en/jobs/site-reliability-engineer) |
+_No matching roles at the moment — check back tomorrow._
 
 ---
 
-## 🌍 Browse by Role
+## 🌍 Browse by Category
 
-- [Software Engineer Jobs in Europe](https://tietalent.com/en/jobs/software-engineer)
-- [Full Stack Developer Jobs in Europe](https://tietalent.com/en/jobs/full-stack-developer)
-- [Backend Engineer Jobs in Europe](https://tietalent.com/en/jobs/backend-engineer)
-- [Devops Engineer Jobs in Europe](https://tietalent.com/en/jobs/devops-engineer)
-- [Data Engineer Jobs in Europe](https://tietalent.com/en/jobs/data-engineer)
-- [Product Manager Jobs in Europe](https://tietalent.com/en/jobs/product-manager)
-- [Site Reliability Engineer Jobs in Europe](https://tietalent.com/en/jobs/site-reliability-engineer)
-- [Platform Engineer Jobs in Europe](https://tietalent.com/en/jobs/platform-engineer)
-- [Kubernetes Engineer Jobs in Europe](https://tietalent.com/en/jobs/kubernetes-engineer)
-- [Cybersecurity Engineer Jobs in Europe](https://tietalent.com/en/jobs/cybersecurity-engineer)
+- [Software Engineer Jobs](https://tietalent.com/en/jobs/software-engineer)
+- [Full-Stack Developer Jobs](https://tietalent.com/en/jobs/full-stack-developer)
+- [DevOps Engineer Jobs](https://tietalent.com/en/jobs/devops-engineer)
+- [Backend Engineer Jobs](https://tietalent.com/en/jobs/backend-engineer)
+- [Product Manager Jobs](https://tietalent.com/en/jobs/product-manager)
+- [Data Engineer Jobs](https://tietalent.com/en/jobs/data-engineer)
+- [Site Reliability Engineer Jobs](https://tietalent.com/en/jobs/site-reliability-engineer)
+- [Cybersecurity Engineer Jobs](https://tietalent.com/en/jobs/cybersecurity-engineer)
 
 ---
 
@@ -72,4 +57,4 @@ TieTalent works differently: **you create one profile, and companies apply to yo
 
 ---
 
-*Updated automatically every day. Last update: 2026-05-11 14:20 UTC*
+*Updated automatically every day. Last update: 2026-05-11 14:46 UTC*
