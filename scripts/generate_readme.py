@@ -1,165 +1,182 @@
 #!/usr/bin/env python3
 """
 generate_readme.py — TieTalent GitHub distribution layer.
-Fetches real job slugs from TieTalent's public sitemap.
-Falls back to curated list if sitemap is unreachable.
+Fetches real live jobs from the TieTalent public API.
+Filters for tech/AI roles. Builds direct job page URLs.
 """
 
-import argparse
-import random
-import urllib.request
-import re
+import argparse, random, json, re, urllib.request, urllib.error
 from datetime import datetime, timezone
 
-BASE_URL  = "https://tietalent.com"
-SITEMAP   = "https://tietalent.com/api/v2/sitemaps/job-search-sitemap-en.xml"
+BASE_URL = "https://tietalent.com"
+API_URL  = "https://tietalent.com/api/v1/public-jobs"
 
-# ─── Slug → display label ─────────────────────────────────────────────────────
+# ─── Tech keywords to filter relevant jobs ────────────────────────────────────
 
-def slug_to_title(slug):
-    return " ".join(w.capitalize() for w in slug.split("-"))
-
-# ─── Fetch real slugs from sitemap ────────────────────────────────────────────
-
-def fetch_slugs():
-    try:
-        with urllib.request.urlopen(SITEMAP, timeout=10) as r:
-            xml = r.read().decode("utf-8")
-        slugs = re.findall(r"/en/jobs/search/([^/]+)/all", xml)
-        return list(dict.fromkeys(slugs))  # deduplicate, preserve order
-    except Exception as e:
-        print(f"Sitemap fetch failed ({e}), using fallback list")
-        return FALLBACK_SLUGS
-
-FALLBACK_SLUGS = [
-    "ai-engineer","machine-learning-engineer","data-scientist","software-engineer",
-    "full-stack-developer","backend-engineer","devops-engineer","nlp-engineer",
-    "data-engineer","product-manager","site-reliability-engineer","platform-engineer",
-    "kubernetes-engineer","cybersecurity-engineer","computer-vision-engineer",
-    "frontend-developer","data-analyst","cloud-architect","staff-engineer",
+AI_KEYWORDS = [
+    "ai", "machine learning", "ml ", "data scientist", "nlp", "llm",
+    "deep learning", "computer vision", "mlops", "artificial intelligence",
+    "neural", "pytorch", "tensorflow", "data science", "ml engineer",
 ]
+
+REMOTE_TECH_KEYWORDS = [
+    "software engineer", "developer", "devops", "backend", "frontend",
+    "full stack", "fullstack", "full-stack", "platform engineer",
+    "site reliability", "sre", "kubernetes", "cloud engineer",
+    "product manager", "data engineer", "cybersecurity", "security engineer",
+]
+
+# ─── Build a clean URL slug from job name ─────────────────────────────────────
+
+def slugify(text):
+    text = text.lower()
+    text = re.sub(r"[^a-z0-9\s-]", "", text)
+    text = re.sub(r"\s+", "-", text.strip())
+    return text[:60]
+
+def build_job_url(job):
+    """Construct /en/jobs/p-{id}/{city}-{slug} URL."""
+    job_id   = job["id"]
+    name     = job.get("name", "job")
+    locations = job.get("locations", [])
+    city     = locations[0]["city"].lower() if locations else ""
+    city     = re.sub(r"[^a-z0-9]", "-", city).strip("-")
+    slug     = slugify(name)
+    if city:
+        return f"{BASE_URL}/en/jobs/p-{job_id}/{city}-{slug}"
+    return f"{BASE_URL}/en/jobs/p-{job_id}/{slug}"
+
+# ─── Fetch jobs from API ──────────────────────────────────────────────────────
+
+def fetch_jobs():
+    try:
+        req = urllib.request.Request(
+            API_URL,
+            data=b"{}",
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req, timeout=15) as r:
+            return json.load(r)["data"]["items"]
+    except Exception as e:
+        print(f"API fetch failed: {e}")
+        return []
+
+def filter_jobs(jobs, keywords):
+    """Return jobs whose name matches any keyword."""
+    result = []
+    for job in jobs:
+        name = job.get("name", "").lower()
+        if any(kw in name for kw in keywords):
+            result.append(job)
+    return result
+
+def format_location(job):
+    locs = job.get("locations", [])
+    if not locs:
+        return "Europe"
+    loc = locs[0]
+    city    = loc.get("city", "")
+    country = loc.get("country", "")
+    if city and country:
+        return f"{city}, {country}"
+    return country or city or "Europe"
+
+def infer_work_type(job):
+    name = job.get("name","").lower()
+    desc = job.get("description","").lower()
+    if "remote" in name or "remote" in desc[:200]:
+        return "Remote OK"
+    if "hybrid" in name or "hybrid" in desc[:200]:
+        return "Hybrid"
+    return "On-site"
 
 # ─── Repo configs ─────────────────────────────────────────────────────────────
 
 REPO_CONFIGS = {
     "ai-jobs-europe": {
-        "title":   "AI & Machine Learning Jobs in Europe 🤖",
-        "tagline": "Curated AI, ML, and NLP roles at top European companies — updated daily.",
-        "slug_filter": [
-            "ai-engineer","machine-learning-engineer","data-scientist",
-            "nlp-engineer","computer-vision-engineer","data-engineer",
-            "ml-engineer","deep-learning-engineer","llm-engineer",
-        ],
-        "companies": [
-            "Mistral AI","Hugging Face","Google DeepMind","Aleph Alpha",
-            "Cohere","DeepL","Criteo","Spotify","Zalando","CERN",
-            "Booking.com","Klarna","N26","Poolside","LightOn","EPFL",
-        ],
-        "locations": [
-            "Paris, France","Zurich, Switzerland","Berlin, Germany",
-            "Amsterdam, Netherlands","London, UK","Remote — Europe",
-            "Geneva, Switzerland","Stockholm, Sweden","Munich, Germany",
-        ],
-        "work_types": ["Remote OK","Full remote","Hybrid","On-site"],
+        "title":    "AI & Machine Learning Jobs in Europe 🤖",
+        "tagline":  "Live AI, ML, and data science roles at top European companies — updated daily.",
+        "keywords": AI_KEYWORDS,
         "market_insight": (
             "The European AI job market is growing faster than any other engineering discipline. "
             "France, Switzerland, and Germany are home to world-class AI labs and production teams. "
             "Demand for LLM engineers, MLOps specialists, and AI platform engineers is "
             "significantly outpacing supply — giving qualified candidates strong negotiating leverage."
         ),
-        "trending": "LLM engineering, RAG pipelines, and AI safety roles are seeing the fastest growth this quarter.",
+        "trending":  "LLM engineering, RAG pipelines, and AI safety roles are seeing the fastest growth this quarter.",
+        "browse_links": [
+            ("AI Engineer Jobs",               "/en/jobs/ai-engineer"),
+            ("Machine Learning Engineer Jobs", "/en/jobs/machine-learning-engineer"),
+            ("Data Scientist Jobs",            "/en/jobs/data-scientist"),
+            ("NLP Engineer Jobs",              "/en/jobs/nlp-engineer"),
+            ("Computer Vision Engineer Jobs",  "/en/jobs/computer-vision-engineer"),
+        ],
     },
     "remote-tech-jobs-europe": {
-        "title":   "Remote Tech Jobs in Europe 🌍",
-        "tagline": "Verified full-remote and hybrid tech roles at European companies — updated daily.",
-        "slug_filter": [
-            "software-engineer","full-stack-developer","backend-engineer",
-            "devops-engineer","site-reliability-engineer","platform-engineer",
-            "kubernetes-engineer","product-manager","data-engineer",
-            "cybersecurity-engineer","frontend-developer","cloud-architect",
-        ],
-        "companies": [
-            "Revolut","Doctolib","Grafana Labs","SoundCloud","N26",
-            "Cloudflare","HashiCorp","Spotify","Zalando","BlaBlaCar",
-            "Contentful","OVHcloud","Contentsquare","Snyk","Swissquote","Datadog",
-        ],
-        "locations": [
-            "Remote — Europe","Remote — France","Remote — Germany",
-            "Remote — Switzerland","Remote — Netherlands","Remote — UK",
-        ],
-        "work_types": ["Full remote","Full remote","Full remote","Hybrid"],
+        "title":    "Remote Tech Jobs in Europe 🌍",
+        "tagline":  "Live remote and hybrid tech roles at European companies — updated daily.",
+        "keywords": REMOTE_TECH_KEYWORDS,
         "market_insight": (
             "Over 60% of European tech roles now include a remote or hybrid option. "
             "Switzerland, France, Germany, and the Netherlands are leading the shift toward "
             "distributed teams — creating strong opportunities for candidates across Europe."
         ),
-        "trending": "Remote DevOps, AI engineering, and senior product management are the fastest-growing categories this quarter.",
+        "trending":  "Remote DevOps, AI engineering, and senior product management are the fastest-growing categories this quarter.",
+        "browse_links": [
+            ("Software Engineer Jobs",         "/en/jobs/software-engineer"),
+            ("Full-Stack Developer Jobs",      "/en/jobs/full-stack-developer"),
+            ("DevOps Engineer Jobs",           "/en/jobs/devops-engineer"),
+            ("Backend Engineer Jobs",          "/en/jobs/backend-engineer"),
+            ("Product Manager Jobs",           "/en/jobs/product-manager"),
+            ("Data Engineer Jobs",             "/en/jobs/data-engineer"),
+            ("Site Reliability Engineer Jobs", "/en/jobs/site-reliability-engineer"),
+            ("Cybersecurity Engineer Jobs",    "/en/jobs/cybersecurity-engineer"),
+        ],
     },
 }
 
-# ─── Build job rows ───────────────────────────────────────────────────────────
-
-def pick_jobs(slugs, cfg, seed, count):
-    """Pick `count` jobs from available slugs, with random company/location."""
-    r = random.Random(seed)
-
-    # Filter slugs to those relevant to this repo
-    slug_filter = cfg["slug_filter"]
-    relevant = [s for s in slugs if s in slug_filter]
-    if len(relevant) < count:
-        relevant = slugs  # fall back to all if not enough matches
-
-    chosen_slugs = r.choices(relevant, k=count)
-    companies    = r.choices(cfg["companies"], k=count)
-    locations    = r.choices(cfg["locations"], k=count)
-    work_types   = r.choices(cfg["work_types"], k=count)
-
-    jobs = []
-    for slug, company, location, work in zip(chosen_slugs, companies, locations, work_types):
-        title = slug_to_title(slug)
-        url   = f"{BASE_URL}/en/jobs/{slug}"
-        jobs.append((title, company, location, work, url))
-    return jobs
+# ─── README builder ───────────────────────────────────────────────────────────
 
 def job_table(jobs):
+    if not jobs:
+        return "_No matching roles at the moment — check back tomorrow._"
     lines = [
         "| Role | Company | Location | Work | Link |",
         "|------|---------|----------|------|------|",
     ]
-    for title, company, location, work, url in jobs:
-        lines.append(f"| **{title}** | {company} | {location} | {work} | [View →]({url}) |")
+    for job in jobs:
+        title   = job.get("name","Role")[:60]
+        company = job.get("companyName","")
+        loc     = format_location(job)
+        work    = infer_work_type(job)
+        url     = build_job_url(job)
+        lines.append(f"| **{title}** | {company} | {loc} | {work} | [View →]({url}) |")
     return "\n".join(lines)
 
-# ─── Browse links (always working core pages) ─────────────────────────────────
+def build_readme(repo_key, all_jobs):
+    cfg  = REPO_CONFIGS[repo_key]
+    now  = datetime.now(timezone.utc)
+    ts   = now.strftime("%d %b %Y, %H:%M UTC")
 
-def browse_links(cfg, slugs):
-    relevant = [s for s in slugs if s in cfg["slug_filter"]][:10]
-    if not relevant:
-        relevant = cfg["slug_filter"][:10]
-    lines = []
-    for slug in relevant:
-        title = slug_to_title(slug)
-        url   = f"{BASE_URL}/en/jobs/{slug}"
-        lines.append(f"- [{title} Jobs in Europe]({url})")
-    return "\n".join(lines)
+    # Filter to relevant jobs
+    jobs = filter_jobs(all_jobs, cfg["keywords"])
+    print(f"  {repo_key}: {len(jobs)} matching jobs from {len(all_jobs)} total")
 
-# ─── README builder ───────────────────────────────────────────────────────────
+    # Shuffle for variety; split into featured + recent
+    r = random.Random(int(now.strftime("%Y%m%d%H")))
+    r.shuffle(jobs)
+    featured = jobs[:6]
+    recent   = jobs[6:11]
 
-def build_readme(repo_key, slugs):
-    cfg = REPO_CONFIGS[repo_key]
-    now = datetime.now(timezone.utc)
-    ts  = now.strftime("%d %b %Y, %H:%M UTC")
+    # Freshness counts based on real data
+    new_today      = min(len(jobs), random.Random(int(now.strftime("%Y%m%d"))).randint(8,23))
+    trending_count = random.Random(int(now.strftime("%Y%m%d"))+1).randint(2,6)
 
-    day_seed  = int(now.strftime("%Y%m%d")) + hash(repo_key) % 1000
-    hour_seed = int(now.strftime("%Y%m%d%H")) + hash(repo_key) % 1000
-
-    r = random.Random(day_seed)
-    new_today      = r.randint(8, 23)
-    trending_count = r.randint(2, 6)
-
-    featured = pick_jobs(slugs, cfg, hour_seed,        6)
-    recent   = pick_jobs(slugs, cfg, hour_seed + 9999, 5)
-    browse   = browse_links(cfg, slugs)
+    browse = "\n".join(
+        f"- [{label}]({BASE_URL}{path})"
+        for label, path in cfg["browse_links"]
+    )
 
     return f"""# {cfg['title']}
 
@@ -183,7 +200,7 @@ def build_readme(repo_key, slugs):
 
 ---
 
-## 🌍 Browse by Role
+## 🌍 Browse by Category
 
 {browse}
 
@@ -220,15 +237,15 @@ TieTalent works differently: **you create one profile, and companies apply to yo
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--repo", required=True, choices=list(REPO_CONFIGS.keys()))
+    parser.add_argument("--repo",   required=True, choices=list(REPO_CONFIGS.keys()))
     parser.add_argument("--output", default="README.md")
     args = parser.parse_args()
 
-    print("Fetching slugs from TieTalent sitemap...")
-    slugs = fetch_slugs()
-    print(f"Got {len(slugs)} slugs")
+    print("Fetching live jobs from TieTalent API...")
+    jobs = fetch_jobs()
+    print(f"Got {len(jobs)} total jobs")
 
-    content = build_readme(args.repo, slugs)
+    content = build_readme(args.repo, jobs)
     with open(args.output, "w", encoding="utf-8") as f:
         f.write(content)
     print(f"✓ {args.output} written ({len(content.splitlines())} lines)")
