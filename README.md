@@ -2,7 +2,7 @@
 
 > Live remote and hybrid tech roles at European companies — updated daily.
 
-> 🔥 **25 new roles added today** &nbsp;·&nbsp; 📈 **7 trending this week** &nbsp;·&nbsp; 🕐 **Updated 11 May 2026, 15:28 UTC**
+> 🔥 **22 new roles added today** &nbsp;·&nbsp; 📈 **7 trending this week** &nbsp;·&nbsp; 🕐 **Updated 12 May 2026, 11:22 UTC**
 
 **[→ Browse all jobs on TieTalent](https://tietalent.com/en/jobs)** &nbsp;·&nbsp; **[Create your free profile — companies apply to you](https://tietalent.com/register)**
 
@@ -12,12 +12,12 @@
 
 | Role | Company | Location | Work | Link |
 |------|---------|----------|------|------|
-| **Software Engineer with Poly SR SWE1** | Lockheed Martin | Arlington, United States | On-site | [View →](https://tietalent.com/en/jobs/p-719143753/arlington-software-engineer-with-poly-sr-swe1) |
-| **Software Engineer with Poly SR SWE1** | Lockheed Martin | Washington, United States | On-site | [View →](https://tietalent.com/en/jobs/p-735280670/washington-software-engineer-with-poly-sr-swe1) |
-| **Software Engineer with Poly SR SWE1** | Lockheed Martin | Annapolis, United States | On-site | [View →](https://tietalent.com/en/jobs/p-713721381/annapolis-software-engineer-with-poly-sr-swe1) |
-| **Senior Software Engineer Staff - Clearance Required** | Lockheed Martin | Washington, United States | On-site | [View →](https://tietalent.com/en/jobs/p-717949375/washington-senior-software-engineer-staff-clearance-required) |
-| **Senior Software Engineer Staff - Clearance Required** | Lockheed Martin | Washington, United States | On-site | [View →](https://tietalent.com/en/jobs/p-735280666/washington-senior-software-engineer-staff-clearance-required) |
-| **Senior Software Engineer Staff - Clearance Required** | Lockheed Martin | Rockville, United States | On-site | [View →](https://tietalent.com/en/jobs/p-749816707/rockville-senior-software-engineer-staff-clearance-required) |
+| **Software Engineer with Poly SR SWE1** | Lockheed Martin | Sterling, United States | On-site | [View →](https://tietalent.com/en/jobs/p-713109867/sterling-software-engineer-with-poly-sr-swe1) |
+| **Senior Software Engineer Staff - Clearance Required** | Lockheed Martin | Annapolis, United States | On-site | [View →](https://tietalent.com/en/jobs/p-717949403/annapolis-senior-software-engineer-staff-clearance-required) |
+| **Senior Software Engineer Staff - Clearance Required** | Lockheed Martin | Olney, United States | On-site | [View →](https://tietalent.com/en/jobs/p-712348450/olney-senior-software-engineer-staff-clearance-required) |
+| **Software Engineer with Poly SR SWE1** | Lockheed Martin | Burke, United States | On-site | [View →](https://tietalent.com/en/jobs/p-711624211/burke-software-engineer-with-poly-sr-swe1) |
+| **Software Engineer with Poly SR SWE1** | Lockheed Martin | Laurel, United States | On-site | [View →](https://tietalent.com/en/jobs/p-708895487/laurel-software-engineer-with-poly-sr-swe1) |
+| **Software Engineer with Poly SR SWE1** | Lockheed Martin | Lorton, United States | On-site | [View →](https://tietalent.com/en/jobs/p-708895489/lorton-software-engineer-with-poly-sr-swe1) |
 
 ---
 
@@ -25,11 +25,11 @@
 
 | Role | Company | Location | Work | Link |
 |------|---------|----------|------|------|
-| **Senior Software Engineer Staff - Clearance Required** | Lockheed Martin | Greenbelt, United States | On-site | [View →](https://tietalent.com/en/jobs/p-717949394/greenbelt-senior-software-engineer-staff-clearance-required) |
-| **Software Engineer with Poly SR SWE1** | Lockheed Martin | Washington, United States | On-site | [View →](https://tietalent.com/en/jobs/p-732010573/washington-software-engineer-with-poly-sr-swe1) |
-| **Software Engineer with Poly SR SWE1** | Lockheed Martin | Washington, United States | On-site | [View →](https://tietalent.com/en/jobs/p-735280672/washington-software-engineer-with-poly-sr-swe1) |
-| **Software Engineer with Poly SR SWE1** | Lockheed Martin | Arlington, United States | On-site | [View →](https://tietalent.com/en/jobs/p-716182876/arlington-software-engineer-with-poly-sr-swe1) |
-| **Software Engineer with Poly SR SWE1** | Lockheed Martin | Reston, United States | On-site | [View →](https://tietalent.com/en/jobs/p-716182882/reston-software-engineer-with-poly-sr-swe1) |
+| **Software Engineer with Poly SR SWE1** | Lockheed Martin | Perryman, United States | On-site | [View →](https://tietalent.com/en/jobs/p-709849599/perryman-software-engineer-with-poly-sr-swe1) |
+| **Software Engineer with Poly SR SWE1** | Lockheed Martin | Rockville, United States | On-site | [View →](https://tietalent.com/en/jobs/p-719547188/rockville-software-engineer-with-poly-sr-swe1) |
+| **Senior Software Engineer Staff - Clearance Required** | Lockheed Martin | Hydes, United States | On-site | [View →](https://tietalent.com/en/jobs/p-712718136/hydes-senior-software-engineer-staff-clearance-required) |
+| **Senior Software Engineer Staff - Clearance Required** | Lockheed Martin | Cockeysville, United States | On-site | [View →](https://tietalent.com/en/jobs/p-713109863/cockeysville-senior-software-engineer-staff-clearance-required) |
+| **Senior Software Engineer Staff - Clearance Required** | Lockheed Martin | Glenwood, United States | On-site | [View →](https://tietalent.com/en/jobs/p-708895491/glenwood-senior-software-engineer-staff-clearance-required) |
 
 ---
 
@@ -70,4 +70,4 @@ TieTalent works differently: **you create one profile, and companies apply to yo
 
 ---
 
-*Updated automatically every day. Last update: 2026-05-11 15:28 UTC*
+*Updated automatically every day. Last update: 2026-05-12 11:22 UTC*
