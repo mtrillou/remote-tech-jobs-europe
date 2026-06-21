@@ -2,7 +2,7 @@
 
 > The best remote and hybrid tech jobs at European companies — updated daily.
 
-> 🔥 **21 new roles added today** &nbsp;·&nbsp; 📈 **4 trending this week** &nbsp;·&nbsp; 🕐 **Updated 20 Jun 2026, 11:20 UTC**
+> 🔥 **25 new roles added today** &nbsp;·&nbsp; 📈 **6 trending this week** &nbsp;·&nbsp; 🕐 **Updated 21 Jun 2026, 11:46 UTC**
 
 **[→ Browse all jobs on TieTalent](https://tietalent.com/en/jobs)** &nbsp;·&nbsp; **[Create your free profile — companies apply to you](https://tietalent.com/register)**
 
@@ -60,4 +60,4 @@ TieTalent works differently: **you create one profile, and companies apply to yo
 
 ---
 
-*Updated automatically every day. Last update: 2026-06-20 11:20 UTC*
+*Updated automatically every day. Last update: 2026-06-21 11:46 UTC*
